@@ -10,14 +10,14 @@ class TestCase {
     string nameTest,msgTest;
     public :
       TestCase(string name,ostream &out):
-         passTest(0),failedTest(0), totalTest(0),nameTest(name),msgTest(name +": Failure in test #"){}
+         passTest(0),failedTest(0), totalTest(0),nameTest(name),msgTest(name +": Failure in test "){}
 
         template <typename T> TestCase& check_equal (T first, T second) {
         totalTest++;
         if (first == second) {
             passTest++;
         } else {
-            cout << msgTest << totalTest << ": " << first<<" should equal "  << second<< "!\n";
+            cout << msgTest <<"#"<< totalTest << ": " << first<<" should equal "  << second<< "!\n";
             failedTest++;
         }
         return *this;
@@ -27,7 +27,7 @@ class TestCase {
         if (first != second) {
             passTest++;
         } else {
-            cout << msgTest << totalTest << ": " << first<<" should not equal "  << second<< "!\n";
+            cout << msgTest <<"#"<< totalTest << ": " << first<<" should not equal "  << second<< "!\n";
             failedTest++;
         }
         return *this;
@@ -37,7 +37,7 @@ class TestCase {
         if (foo(first)== second) {
             passTest++;
         } else {
-            cout << msgTest << totalTest<<":"<<" Function should return " << second<<"  but returned "  << foo(first)<< "!\n";
+            cout << msgTest <<"#"<< totalTest<<":"<<" Function should return " << second<<"  but returned "  << foo(first)<< "!\n";
             failedTest++;
         }
         return *this;
@@ -49,7 +49,7 @@ class TestCase {
         if (s.str()== other) {
             passTest++;
         } else {
-            cout << msgTest << totalTest<<":"  <<" string value should be "<< other<<" but is "  << s.str()<< "!\n";
+            cout << msgTest <<"#"<< totalTest<<":"  <<" string value should be "<< other<<" but is "  << s.str()<< "!\n";
             failedTest++;
         }
         return *this;
