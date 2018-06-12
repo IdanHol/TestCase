@@ -8,16 +8,17 @@ class TestCase {
     private :
     int passTest,failedTest,totalTest;
     string nameTest,msgTest;
+    ostream* out;
     public :
       TestCase(string name,ostream &out):
-         passTest(0),failedTest(0), totalTest(0),nameTest(name),msgTest(name +": Failure in test "){}
+         passTest(0),failedTest(0), totalTest(0),nameTest(name),out(&out),msgTest(name +": Failure in test "){}
 
         template <typename T> TestCase& check_equal (T first, T second) {
         totalTest++;
         if (first == second) {
             passTest++;
         } else {
-            cout << msgTest <<"#"<< totalTest << ": " << first<<" should equal "  << second<< "!\n";
+            *out<< msgTest <<"#"<< totalTest << ": " << first<<" should equal "  << second<< "!\n";
             failedTest++;
         }
         return *this;
@@ -27,7 +28,7 @@ class TestCase {
         if (first != second) {
             passTest++;
         } else {
-            cout << msgTest <<"#"<< totalTest << ": " << first<<" should not equal "  << second<< "!\n";
+            *out<< msgTest <<"#"<< totalTest << ": " << first<<" should not equal "  << second<< "!\n";
             failedTest++;
         }
         return *this;
@@ -37,7 +38,7 @@ class TestCase {
         if (foo(first)== second) {
             passTest++;
         } else {
-            cout << msgTest <<"#"<< totalTest<<":"<<" Function should return " << second<<"  but returned "  << foo(first)<< "!\n";
+            *out<< msgTest <<"#"<< totalTest<<":"<<" Function should return " << second<<"  but returned "  << foo(first)<< "!\n";
             failedTest++;
         }
         return *this;
@@ -49,13 +50,14 @@ class TestCase {
         if (s.str()== other) {
             passTest++;
         } else {
-            cout << msgTest <<"#"<< totalTest<<":"  <<" string value should be "<< other<<" but is "  << s.str()<< "!\n";
+            *out<< msgTest <<"#"<< totalTest<<":"  <<" string value should be "<< other<<" but is "  << s.str()<< "!\n";
             failedTest++;
         }
         return *this;
         }
         void print(){
-            cout<<failedTest<<" failed, "<<passTest<<" passed "<<totalTest<<" total."<<endl<<"---"<<endl;
+            *out<<failedTest<<" failed, "<<passTest<<" passed "<<totalTest<<" total."<<endl;
+            *out<<"---"<<endl;
         }
 
 };
